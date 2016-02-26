@@ -1,46 +1,58 @@
-[cmus-remote-vim](https://github.com/hyoshida/cmus-remote.vim)
-===============
+# [vim-cmus](https://github.com/azadkuh/vim-cmus)
+vim-cmus: control [cmus](https://cmus.github.io/) music player directly from vim
 
-Why I made this
----------------
+`cmus` is a small, fast, **No Nonsense** and powerful console music player for Unix-like operating systems.
 
-I often listen to music while I write code,
-and I don't have (or want) those fancy media keys that some people have on their keyboards.
-Still wanted to be able to control my music player from my editor, so I wrote this.
+This plugin helps you to control cmus right from your vim/gvim/macvim.
 
-
-How to use
-----------
-
-1. Place `plugin/cmus-remote.vim` in your `~/.vim/plugin/` directory.
-2. Bind the functions you think you'll need in your `.vimrc`.
-3. Smile.
+`vim-cmus` requires python (2.7 or higher) to operate.
 
 
-Functions provided by this plugin
----------------------------------
+## screen cast
+![vim-cmus](https://cloud.githubusercontent.com/assets/6501462/12872205/60b97712-cdb1-11e5-8e0b-f952a41c5f90.gif)
 
- * cmus:pause()
-   * Pauses/resumes song.
- * cmus:stop()
-   * Commands **cmus** to stop playing music.
- * cmus:play()
-   * Command **cmus** to start playing music.
- * cmus:next()
-   * Jump to next track in playlist.
- * cmus:previous()
-   * Jump to previous track in playlist.
- * cmus:current()
-   * Echo artist, album and track title.
+## installation
+Use you favourite vim plugin manager, [vundle](https://github.com/VundleVim/Vundle.vim) for example, and add:
+```
+" cmus remote control
+Plugin 'azadkuh/vim-cmus'
+```
+
+You can optionally add following mappings to your `.vimrc`:
+```
+" cmus controls
+nnoremap <leader>i :CmusCurrent<cr>
+nnoremap <leader>z :CmusPrevious<cr>
+nnoremap <leader>x :CmusPlay<cr>
+nnoremap <leader>c :CmusPause<cr>
+nnoremap <leader>v :CmusStop<cr>
+nnoremap <leader>b :CmusNext<cr>
+```
+
+## optional bidi
+**Optionally**, if your music collection contains unicode strings esp in RTL (right to left) languages as Persian, Hebrew, Arabic, ... please install [pyfribidi](https://pypi.python.org/pypi/pyfribidi/) to help `vim-cmus` render bi-directional text (where the cmus itself fails to render them properly! as shown in the sample screen cast)
+
+to Install `pyfribidi`:
+```bash
+$> sudo pip install pyfribidi
+```
+by [pip](https://pip.pypa.io/en/stable/installing/) or any other python package manager.
 
 
-Example bindings for your .vimrc
---------------------------------
+## command list
+at the moment following commands are implemented:
+```
+" shows an interactive menu to send a command to cmus remotely
+:Cmus
 
-I have personally bound `cmus:next`, `cmus:previous` and `cmus:pause` in my `.vimrc`.
+" shows the information of current song
+:CmusCurrent
 
-    " A few common cmus commands
-    nnoremap <leader>n :call cmus:next()<cr>
-    nnoremap <leader>p :call cmus:previous()<cr>
-    nnoremap <leader><Space> :call cmus:pause()<cr>
+" commands to controll cmus player
+:CmusPrevious
+:CmusNext
+:CmusPlay
+:CmusPause
+:CmusStop
+```
 
